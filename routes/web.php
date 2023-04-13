@@ -14,5 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+Route::get('/blog', function () {
+    return view('posts');
+});
+
+Route::get('/about', function () {
+    $data = [
+        'name' => 'Arza',
+        'email' => 'email@email.com',
+        'image' => 'profile.jpg'
+    ];
+
+    return view('about', $data);
 });
