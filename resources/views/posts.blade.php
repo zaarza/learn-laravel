@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/styles/main.css">
-    <title>Blog</title>
-</head>
-<body>
-    <h1>Halaman Blog</h1>
+@extends('layouts.main')
 
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/blog">Blog</a></li>
-    </ul>
-</body>
-</html>
+@include('partials.navbar')
+
+@section('content')
+    <div class="py-4">
+        <h1>Blog</h1>
+        
+        <div class="d-flex flex-column row-gap-4">
+            @foreach ($posts as $post)
+                <article class="bg-body-tertiary p-3">
+                    <a href="blog/{{ $post['slug'] }}"><h4>{{ $post['title'] }}</h4></a>
+                    <h6>{{ $post['author'] }}</h6>
+                    <p>{{ $post['body'] }}</p>
+                </article>
+            @endforeach
+        </div>
+
+    </div>
+@endsection
