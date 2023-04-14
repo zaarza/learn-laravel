@@ -7,9 +7,9 @@
         <a href="/blog">Back to posts</a>
 
         <article class="bg-body-tertiary p-3 mt-4">
-            <h4>{{ $post['title'] }}</h4>
-            <h6>{{ $post['author'] }}</h6>
-            <p>{{ $post['body'] }}</p>
+            <h4>{{ $post->title }}</h4>
+            <h6>{{ $post->author }}</h6>
+            {!! $post->body !!}
         </article>
     </div>
 @endsection
