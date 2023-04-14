@@ -26,7 +26,6 @@ Route::get('/blog', [PostController::class, 'index']);
 
 Route::get('/blog/{post:slug}', [PostController::class, 'show']);
 
-
 Route::get('/about', function () {
     $data = [
         'title' => 'About',
@@ -37,3 +36,7 @@ Route::get('/about', function () {
 
     return view('about', $data);
 });
+
+Route::get('/categories', [PostController::class, 'categories']);
+
+Route::get('/categories/{category:slug}', [PostController::class, 'category']);
