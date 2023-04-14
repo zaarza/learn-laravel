@@ -7,8 +7,9 @@
     <h1>All Categories</h1>
 
     <ul>
+        <li><a href="/blog" class="text-decoration-none">All</a></li>
         @foreach ($categories as $category)
-        <li><a href="categories/{{ $category->slug }}">{{ $category->name }}</a></li>
+        <li><a href="/categories/{{ $category->slug }}" class="text-decoration-none">{{ $category->name }}</a></li>
         @endforeach
     </ul>
 </div>
