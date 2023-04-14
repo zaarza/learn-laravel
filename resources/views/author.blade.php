@@ -6,7 +6,7 @@
 <div class="py-4 d-flex flex-column row-gap-4">
     <div class="d-flex flex-column row-gap-2">
         <h1 class="m-0">Blog</h1>
-        <h2 class="fs-6 m-0">Showing posts for <span class="badge bg-primary">#{{ $category }}</span> category. Show <a href="/blog" class="text-decoration-none">all</a></h2>
+        <h2 class="fs-6 m-0">Showing posts written by <span class="badge bg-primary">#{{ $name }}</span></h2>
     </div>
     
     <div class="d-flex flex-column row-gap-4">
