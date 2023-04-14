@@ -13,15 +13,15 @@ class PostController extends Controller
 
     {
         return view('posts', [
-            'title' => 'Blog',
+            'title' => 'All Posts',
             'posts' => Post::latest()->get(),
         ]);
     }
 
     public function category(Category $category)
     {
-        return view('category', [
-            'title' => $category->name,
+        return view('posts', [
+            'title' => "$category->name Category",
             'category' => $category->name,
             'posts' => $category->posts,
         ]);
@@ -37,7 +37,7 @@ class PostController extends Controller
 
     public function author(User $user)
     {
-        return view('author', [
+        return view('posts', [
             'title' => "$user->name's Post",
             'name' => $user->name,
             'posts' => $user->posts,
