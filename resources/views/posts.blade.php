@@ -10,12 +10,11 @@
 
         @if ($posts->count())
             <div class="card">
-                <img src="..." alt="..." class="card-img-top">
+                <img src="https://source.unsplash.com/random/1200x400/?{{ $posts[0]->category->name }}" alt="Post image" class="card-img-top">
                 <div class="card-body d-flex flex-column align-items-center row-gap-4">
                     <div class="d-flex flex-column align-items-center row-gap-2">
                         <h1 class="fs-3 card-title m-0">{{ $posts[0]->title }}</h1>
-                        <a href="/authors/{{ $posts[0]->username }}" class="text-decoration-none m-0 text-muted">{{ $posts[0]->user->name }}</a>
-                        <a href="/categories/{{ $posts[0]->category->slug }}" class="badge bg-secondary fw-normal m-0 text-decoration-none" style="width: fit-content">#{{ $posts[0]->category->name }}</a>
+                        <p>By. <a href="/authors/{{ $posts[0]->user->username }}" class="text-decoration-none">{{ $posts[0]->user->name }}</a> in <a href="/blog/{{ $posts[0]->category->name }}" class="text-decoration-none">{{ $posts[0]->category->name }}</a></p>
                     </div>
 
                     <p class="card-text">{{ $posts[0]->excerpt }}</p>
@@ -32,19 +31,17 @@
             <div class="row">
                 @foreach ($posts->skip(1) as $post)
                     <div class="col-md-4">
-                        <article class="bg-body-tertiary p-3 shadow-sm d-flex flex-column row-gap-2">
-                            <div class="row">
-                                <div class="col-9">
-                                    <h1 class="fs-4"><a href="/blog/{{ $post->slug }}" class="text-decoration-none text-nowrap overflow-hidden w-100">{{ $post->title }}</a></h1>
-                                </div>
-                                <div class="col-3 text-end">
-                                    <a href="/authors/{{ $post->user->username }}" class="text-decoration-none text-muted">{{ $post->user->name }}</a>
-                                </div>
+                        <div class="card">
+                            <a href="/categories/{{ $post->category->name }}" style="width: fit-content; position: absolute; left: 20px; top: 20px; " class="bg-black text-white text-decoration-none py-2 px-3">{{ $post->category->name }}</a>
+                            <img src="https://source.unsplash.com/random/500x400/?{{ $post->category->name }}" alt="Post image" class="card-img-top">
+                            <div class="card-body">
+                                <h1 class="fs-5 card-title">{{ $post->title }}</h1>
+                                <p>By. <a href="/authors/{{ $post->user->username }}" class="text-decoration-none">{{ $post->user->name }}</a> in <a href="/categories/{{ $post->category->name }}" class="text-decoration-none">{{ $post->category->name }}</a></p>
+                                <p class="card-text">{{ $post -> excerpt }}</p>
+                                <a href="/blog/{{ $post->slug }}" class="btn btn-primary">Read more...</a>
+                                <p>Posted at {{ $post->created_at->diffForHumans() }}</p>
                             </div>
-                            <a href="/categories/{{ $post->category->slug }}" class="badge bg-secondary fw-normal text-decoration-none" style="width: fit-content">#{{ $post->category->name }}</a>
-                            <p>{{ $post->excerpt }} <a href="/blog/{{ $post->slug }}" class="text-decoration-none">Read more...</a></p>
-                            <p class="text-muted">Posted at {{ $post->created_at->diffForHUmans() }}</p>
-                        </article>
+                        </div>
                     </div>
                 @endforeach
             </div>
