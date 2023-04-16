@@ -11,7 +11,7 @@
                 <h1 class="fs-4"><a href="/blog/{{ $post->slug }}" class="text-decoration-none">{{ $post->title }}</a></h1>
                 <a href="" class="text-decoration-none text-muted">{{ $post->user->name }}</a>
             </div>
-            <p>{{ $post->excerpt }}</p>
+            <p>{{ $post->body }}</p>
             <a href="/categories/{{ $post->category->slug }}" class="badge bg-secondary fw-normal text-decoration-none" style="width: fit-content">#{{ $post->category->name }}</a>
         </article>
     </div>
