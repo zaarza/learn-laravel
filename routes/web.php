@@ -38,7 +38,3 @@ Route::get('/about', function () {
 });
 
 Route::get('/categories', [PostController::class, 'categories']);
-
-Route::get('/categories/{category:slug}', [PostController::class, 'category']);
-
-Route::get('/authors/{user:username}', [PostController::class, 'author']);

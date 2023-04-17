@@ -10,22 +10,32 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index()
-
     {
+        $title = '';
+        if (request('category')) {
+            $category = Category::firstWhere('slug', request('category'));
+            $title = " in $category->name";
+        };
+
+        if (request('author')) {
+            $author = User::firstWhere('username', request('author'));
+            $title = " by $author->name";
+        };
+
         return view('posts', [
-            'title' => 'All Posts',
-            'posts' => Post::with(['category', 'user'])->latest()->get(),
+            'title' => 'All Posts' . $title,
+            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(7)->withQueryString(),
         ]);
     }
 
-    public function category(Category $category)
-    {
-        return view('posts', [
-            'title' => "$category->name Category",
-            'category' => $category->name,
-            'posts' => $category->posts->load(['user', 'category']),
-        ]);
-    }
+    // public function category(Category $category)
+    // {
+    //     return view('posts', [
+    //         'title' => "$category->name Category",
+    //         'category' => $category->name,
+    //         'posts' => $category->posts->load(['user', 'category']),
+    //     ]);
+    // }
 
     public function categories()
     {
