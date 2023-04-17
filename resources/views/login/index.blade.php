@@ -10,16 +10,33 @@
                     {{ session('success') }}
                 </div>
             @endif
-        
-            <form class="d-flex flex-column row-gap-3">
+
+            @if(session()->has('loginError'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('loginError') }}
+                </div>
+            @endif
+
+            <form action="/login" method="POST" class="d-flex flex-column row-gap-3">
+                @csrf
                 <h1 class="h3 fw-normal text-center">Login</h1>
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email address" autofocus required value="{{ old('email') }}">
                     <label for="floatingInput">Email address</label>
+                    @error('email')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <input type="password" class="form-control" name="password" placeholder="Password" required>
                     <label for="floatingPassword">Password</label>
+                    @error('email')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
             </form>
