@@ -5,6 +5,12 @@
 @section('content')
     <div class="row justify-content-center h-100 align-items-center">
         <div class="col-md-4">
+            @if(session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+        
             <form class="d-flex flex-column row-gap-3">
                 <h1 class="h3 fw-normal text-center">Login</h1>
                 <div class="form-floating">
