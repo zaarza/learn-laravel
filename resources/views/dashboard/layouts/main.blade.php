@@ -5,9 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard</title>
+    {{-- Bootstrap --}}
     <link href="{{ URL::asset("assets/styles/vendors/bootstrap/bootstrap.min.css") }}" rel="stylesheet">
     <link href="{{ URL::asset("assets/styles/dashboard.css") }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+
+    {{-- Trix --}}
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset("assets/styles/vendors/trix/trix.css") }}">
+    <script type="text/javascript" src="{{ URL::asset("assets/scripts/vendors/trix/trix.js") }}"></script>
+    <style>
+        trix-toolbar [data-trix-button-group="file-tools"] {
+            display: none;
+        }
+    </style>
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">

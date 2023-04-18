@@ -1,0 +1,60 @@
+@extends('dashboard.layouts.main')
+
+@section('container')
+<div class="row">
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex flex-column pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Create new post</h1>
+            </div>
+
+            <form action="/dashboard/posts" method="POST" class="d-flex flex-column row-gap-3">
+                @csrf
+                <div class="form-floating">
+                    <input type="text" class="form-control @error('title')is-invalid @enderror" name="title" id="title" placeholder="Title" value="{{ old('title') }}" onchange="checkSlug(event)">
+                    <label for="floatingInput">Title</label>
+                    @error('title')
+                     <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" class="form-control @error('slug')is-invalid @enderror" name="slug" id="slug" placeholder="slug" value="{{ old('slug') }}">
+                    <label for="floatingInput">Slug</label>
+                    @error('slug')
+                     <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                </div>
+
+                <select class="form-select" name="category_id">
+                    <option selected>Category</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                  </select>
+
+                <div class="">
+                    <input id="body" type="hidden" name="body">
+                    <trix-editor input="body"></trix-editor>
+                </div>
+
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Create</button>
+            </form>
+    </main>
+</div>
+
+<script>
+    function checkSlug(event) {
+        fetch(`/dashboard/posts/checkslug?title=${event.target.value}`)
+            .then((response) => response.json())
+            .then((data) => document.querySelector('#slug').value = data.slug)
+    };
+
+    document.addEventListener('trix-file-accept', (event) => {
+        event.preventDefault();
+    });
+</script>
+@endsection
