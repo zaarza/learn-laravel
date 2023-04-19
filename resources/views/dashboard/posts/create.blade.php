@@ -50,7 +50,12 @@
 
                   <div>
                     <label for="image" class="form-label">Post image</label>
-                    <input class="form-control" type="file" id="image" name="image">
+                    <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
+                    @error('image')
+                            <small class="mt-1" style="color: #dc3545;">
+                                {{ $message }}
+                            </small>
+                    @enderror
                   </div>
 
                 <div>
