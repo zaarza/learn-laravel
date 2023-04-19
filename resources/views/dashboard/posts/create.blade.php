@@ -7,7 +7,7 @@
                 <h1 class="h2">Create new post</h1>
             </div>
 
-            <form action="/dashboard/posts" method="POST" class="d-flex flex-column row-gap-3">
+            <form action="/dashboard/posts" method="POST" class="d-flex flex-column row-gap-3" enctype="multipart/form-data">
                 @csrf
                 <div class="form-floating">
                     <input type="text" class="form-control @error('title')is-invalid @enderror" name="title" id="title" placeholder="Title" value="{{ old('title') }}" onchange="checkSlug(event)">
@@ -46,6 +46,11 @@
                                 {{ $message }}
                             </div>
                         @enderror
+                  </div>
+
+                  <div>
+                    <label for="image" class="form-label">Post image</label>
+                    <input class="form-control" type="file" id="image" name="image">
                   </div>
 
                 <div>

@@ -21,7 +21,7 @@
                 @csrf
                 <h1 class="h3 fw-normal text-center">Login</h1>
                 <div class="form-floating">
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email address" autofocus required value="{{ old('email') }}">
+                    <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email address" autofocus required value="{{ old('email') }}">
                     <label for="floatingInput">Email address</label>
                     @error('email')
                     <div class="invalid-feedback">
