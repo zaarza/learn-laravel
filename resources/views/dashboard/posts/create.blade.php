@@ -29,16 +29,33 @@
                     @enderror
                 </div>
 
-                <select class="form-select" name="category_id">
-                    <option selected>Category</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                  </select>
+                <div>
+                    <label for="category_id" class="form-label">Category</label>
+                        <select class="form-select @error('category_id')is-invalid @enderror" name="category_id" id="category_id">
+                            <option selected disabled>Select category</option>
+                            @foreach ($categories as $category)
+                                @if (old('category_id') == $category->id)
+                                    <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                @else
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        @error('category_id')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                  </div>
 
-                <div class="">
-                    <input id="body" type="hidden" name="body">
-                    <trix-editor input="body"></trix-editor>
+                <div>
+                    <input id="body" type="hidden" name="body" value="{{ old('body') }}">
+                    <trix-editor input="body" @error('body')style="border: 1px solid #dc3545;" @enderror></trix-editor>
+                        @error('body')
+                                <small class="mt-1" style="color: #dc3545;">
+                                    {{ $message }}
+                                </small>
+                        @enderror
                 </div>
 
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Create</button>
