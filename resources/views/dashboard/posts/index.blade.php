@@ -30,8 +30,12 @@
                         <td>{{ $post->category->name }}</td>
                         <td>
                             <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-primary"><i class="bi bi-eye"></i></a>
-                            <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-warning"><i class="bi bi-pencil"></i></i></a>
-                            <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-danger"><i class="bi bi-trash"></i></i></a>
+                            <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning"><i class="bi bi-pencil"></i></i></a>
+                            <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="d-inline">
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-danger" onclick="return confirm('Confirm delete this post?')"><i class="bi bi-trash"></i></i></button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
