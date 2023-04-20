@@ -7,7 +7,7 @@
                 <h1 class="h2">Create new post</h1>
             </div>
 
-            <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="d-flex flex-column row-gap-3">
+            <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="d-flex flex-column row-gap-3" enctype="multipart/form-data">
                 @method("PUT")
                 @csrf
                 <div class="form-floating">
@@ -49,6 +49,23 @@
                         @enderror
                   </div>
 
+                  <div>
+                    <label for="image" class="form-label">Post image</label>
+
+                    @if ($post->image)
+                        <img src="{{ asset("storage/" . $post->image) }}" class="img-preview img-fluid mb-3" style="max-height: 300px">
+                    @else
+                        <img class="img-preview img-fluid mb-3" style="max-height: 300px">
+                    @endif
+
+                    <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage(event)">
+                    @error('image')
+                            <small class="mt-1" style="color: #dc3545;">
+                                {{ $message }}
+                            </small>
+                    @enderror
+                  </div>
+
                 <div>
                     <input id="body" type="hidden" name="body" value="{{ old('body',$post->body) }}">
                     <trix-editor input="body" @error('body')style="border: 1px solid #dc3545;" @enderror></trix-editor>
@@ -70,6 +87,18 @@
             .then((response) => response.json())
             .then((data) => document.querySelector('#slug').value = data.slug)
     };
+
+    function previewImage(event) {
+        const imageInput = document.querySelector("#image");
+        const imgPreview = document.querySelector(".img-preview");
+
+        imgPreview.style.display = "block";
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(imageInput.files[0]);
+        oFReader.onload = function (oFREvent) {
+            imgPreview.setAttribute("src", oFREvent.target.result)
+        };
+    }
 
     document.addEventListener('trix-file-accept', (event) => {
         event.preventDefault();
