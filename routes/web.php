@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Categories;
 use App\Http\Controllers\DashboardPostController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,4 +58,7 @@ Route::get('/dashboard', function() {
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/dashboard/posts/checkslug', [DashboardPostController::class, 'checkSlug']);
+
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+
+Route::resource('dashboard/categories', Categories::class);
